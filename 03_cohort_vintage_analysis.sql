@@ -1,14 +1,9 @@
 -- Module 3: Cohort and Vintage Analysis
--- Groups loans by when they were issued (the "vintage") and tracks how
--- each group ages over time. This is the standard framework for measuring
--- credit performance because it separates underwriting quality from
--- the age of the book.
-
 
 -- 3.1 Vintage cohort default curve
 -- For each quarterly cohort, shows the cumulative percentage of loans that
 -- have charged off by each month on book (MOB). Plotting these curves side
--- by side lets you see whether recent cohorts are performing better or worse
+-- by side lets us see whether recent cohorts are performing better or worse
 -- than older ones at the same age. The running SUM window function is what
 -- converts the per-month default count into a cumulative curve.
 
