@@ -1,0 +1,6 @@
+seed_data.py
+SETUP.md
+archive (1)/
+__pycache__/
+*.pyc
+.DS_Store
