@@ -1,8 +1,4 @@
 -- Module 1: Portfolio Overview and KPIs
--- Start here to get a feel for the overall health of the book before
--- drilling into risk or performance. These queries answer the questions
--- a credit portfolio manager would ask on a Monday morning.
-
 
 -- 1.1 Snapshot KPIs
 -- A single-row summary of the entire portfolio as of the latest snapshot.
@@ -123,9 +119,7 @@ ORDER BY month;
 
 
 -- 1.4 Purpose-level profitability
--- Not all loan purposes carry the same risk. Debt consolidation is the most
--- common purpose but is it also the riskiest? We use two separate RANK()
--- window functions to score each purpose by volume and by safety independently,
+-- We use two separate RANK() window functions to score each purpose by volume and by safety independently,
 -- so we can see where those two rankings diverge.
 
 SELECT
