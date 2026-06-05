@@ -1,14 +1,7 @@
 -- Module 4: Roll-Rate and Delinquency Migration Analysis
--- Roll-rate analysis tracks how loans move between delinquency buckets from
--- one payment period to the next. It is the standard tool for monitoring
--- whether a portfolio is deteriorating and for estimating how many loans
--- currently in early delinquency will eventually charge off.
-
 
 -- 4.1 Payment bucket view
--- We create a view so all downstream queries can reference dpd_bucket and
--- period without repeating the CASE logic. The period column is critical for
--- the roll-rate matrix: it lets us join a row to the "next month" row by
+-- The period column is critical for the roll-rate matrix: it lets us join a row to the "next month" row by
 -- incrementing period by 1.
 
 CREATE OR REPLACE VIEW v_payment_bucket AS
@@ -77,7 +70,7 @@ ORDER BY
 
 -- 4.3 Cure rate by delinquency severity
 -- Of all loans that ever touched each delinquency bucket, what fraction
--- eventually recovered versus charged off? This tells you how much credit
+-- eventually recovered versus charged off? This tells us how much credit
 -- to give to borrowers who miss a payment but then catch up. A 30 DPD cure
 -- rate above 70% is healthy; anything below 50% suggests the delinquency
 -- pipeline is feeding a large charge-off wave. We use MAX(CASE...) to flag
@@ -188,8 +181,7 @@ ORDER BY avg_months_active;
 
 -- 4.5 Rolling 3-month delinquency trend
 -- Tracks the 30+ DPD rate across all payment periods month by month.
--- This is the type of chart a credit risk team reviews in a weekly monitoring
--- meeting. ROWS BETWEEN 2 PRECEDING AND CURRENT ROW tells the window function
+-- ROWS BETWEEN 2 PRECEDING AND CURRENT ROW tells the window function
 -- to average only the current row and the two rows before it, giving a
 -- 3-month rolling average. LAG gives the month-over-month change.
 
