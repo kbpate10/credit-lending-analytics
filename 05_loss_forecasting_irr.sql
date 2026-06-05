@@ -1,9 +1,4 @@
 -- Module 5: Loss Forecasting, Expected Credit Loss, and IRR
--- These queries sit at the intersection of credit risk and finance.
--- ECL (query 5.1-5.2) is the regulatory framework banks use to set aside
--- reserves. IRR (query 5.3) answers the investor question: given the actual
--- cash flows that happened, what return did this loan actually deliver?
-
 
 -- 5.1 Expected Credit Loss per grade (IFRS 9 / Basel III framework)
 -- ECL = PD x LGD x EAD, where:
