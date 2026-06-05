@@ -1,12 +1,8 @@
 -- Module 2: Credit Risk Segmentation
--- These queries cut the portfolio along credit dimensions to understand
--- which borrower profiles drive losses. The scorecard in query 2.2 is
--- a simplified version of what a real underwriting model produces.
 
 
 -- 2.1 FICO band by DTI band default heatmap
--- Two of the strongest predictors of default are FICO score and debt-to-income
--- ratio. This query builds a grid showing the default rate at every intersection
+-- This query builds a grid showing the default rate at every intersection
 -- of those two dimensions, which helps identify where the safe and risky pockets
 -- of the portfolio sit. The z-score at the end standardizes each cell's default
 -- rate relative to the overall average, so it is easy to spot outliers.
@@ -61,8 +57,7 @@ ORDER BY fico_band, dti_band;
 
 -- 2.2 Internal credit scorecard
 -- A points-based model that converts five borrower attributes into a 0-100
--- score. This is how traditional lenders built underwriting criteria before
--- machine learning models. FICO gets the most weight (40 pts) because it is
+-- score. FICO gets the most weight (40 pts) because it is
 -- the most predictive single variable. The tier cutoffs (Prime, Near-Prime,
 -- Sub-Prime) match standard industry definitions.
 
@@ -153,8 +148,6 @@ ORDER BY avg_score DESC;
 
 
 -- 2.3 Pearson correlation of features with default
--- Before building a model, it is useful to know which individual variables
--- are most linearly correlated with the outcome you are trying to predict.
 -- We cast the loan_status comparison to INT (1 = defaulted, 0 = not) so the
 -- CORR() aggregate function can treat it as a numeric outcome variable.
 -- A negative correlation with FICO is expected: higher score, lower default rate.
@@ -200,8 +193,7 @@ ORDER BY ABS(correlation_with_default) DESC;
 -- 2.4 State-level credit risk profile
 -- Geographic concentration risk: does the default rate vary meaningfully
 -- by state? This matters for portfolio stress testing because a regional
--- recession (e.g. a collapse in oil prices hitting Texas) would affect
--- a geographically concentrated book more than a diversified one.
+-- recession would affect a geographically concentrated book more than a diversified one.
 -- RANK() OVER lets us order states by default rate without a subquery.
 
 SELECT
